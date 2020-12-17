@@ -95,14 +95,24 @@ const iteratorDataRows = async (arrData, url, filename) => {
         const row = arrData[index];
         global.logger.info("Record #: " + record);
         const resp = await requestMethod(url, row, 180000);
+        
         const myJson = {
             record: record,
             status: resp.response,
             message: resp.message,
-            cpedagogico_id: row.tramite_cpedagogico_id,
-            ciudadano_id: row.ciu_numDocumento,
-            comparendo_numero: row.comparendo_numero
+            //cpedagogico_id: row.tramite_cpedagogico_id,
+            ciu_numDocumento: row.ciu_numDocumento,
+            ciu_nombres: row.ciu_nombres,
+            ciu_apellidos: row.ciu_apellidos,
+            ciu_celular: row.ciu_celular,
+            ciu_direccion: row.ciu_direccion,
+            ciu_email: row.ciu_email,
+            comparendo_numero: row.comparendo_numero,
+            sede: resp.result ? resp.result.Sede : "",
+            aula: resp.result ? resp.result.Aula : "",
+            fecha_agendamiento_curso: resp.result ? resp.result.FechaAgendaCurso : ""
         };
+        console.log(myJson);
         responseData.push(myJson);
     }
 
